@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Detalle del Producto</title>
+
+<style>
+body{
+font-family:Arial;
+text-align:center;
+padding:30px;
+background:#fdf6f0;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+max-width:500px;
+margin:auto;
+box-shadow:0 10px 25px rgba(107,15,26,0.2);
+animation:fade 0.6s ease;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+img{
+width:100%;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+h1{color:#6b0f1a;}
+
+.precio{
+font-size:28px;
+color:#6b0f1a;
+font-weight:bold;
+margin:10px 0;
+}
+
+.desc{
+margin-top:10px;
+line-height:1.5;
+}
+
+.extra{
+margin-top:15px;
+color:#a4161a;
+font-weight:bold;
+}
+
+button{
+margin-top:10px;
+padding:12px;
+border:none;
+background:#6b0f1a;
+color:white;
+border-radius:8px;
+cursor:pointer;
+width:100%;
+}
+
+.btn-volver{
+background:#333;
+}
+
+button:hover{
+background:#a4161a;
+transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1 id="nombre"></h1>
+
+<img id="imagen">
+
+<div class="precio" id="precio"></div>
+
+<p class="desc" id="descripcion"></p>
+
+<p class="extra">
+✨ Pieza única • Hecha a mano • Edición limitada
+</p>
+
+<button onclick="comprar()">Comprar por WhatsApp</button>
+<button class="btn-volver" onclick="volver()">⬅ Volver</button>
+
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+let nombre = params.get("nombre");
+let img = params.get("img");
+let precio = params.get("precio");
+
+document.getElementById("nombre").innerText = nombre;
+document.getElementById("imagen").src = img;
+document.getElementById("precio").innerText = "$"+precio+" MXN";
+
+/* HISTORIAS QUE VENDEN */
+let descripciones = {
+
+"Rosa Artesanal": "Rosa no es solo una muñeca… es un recuerdo vivo. Cada puntada representa amor y tradición mexicana. 🔥 Solo existe una como ella.",
+
+"Azul Catrina": "Inspirada en el Día de Muertos. Representa memoria, cultura y respeto por nuestras raíces. 💎 Una pieza única.",
+
+"Bordada Premium": "Hecha a mano con técnicas tradicionales. Cada hilo cuenta una historia de México. ✨ No hay dos iguales.",
+
+"Fiesta Mexicana": "Llena de color y alegría. Representa la esencia de México: música, baile y vida. 🔥"
+};
+
+document.getElementById("descripcion").innerText =
+descripciones[nombre] || "Muñeca artesanal única.";
+
+/* WHATSAPP */
+function comprar(){
+let texto = "Hola, quiero comprar: " + nombre + " por $" + precio + " MXN";
+window.open("https://wa.me/521XXXXXXXXXX?text="+encodeURIComponent(texto));
+}
+
+function volver(){
+window.history.back();
+}
+</script>
+
+</body>
+</html>
